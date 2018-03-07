@@ -14,21 +14,21 @@ local backgroundImage = display.newImageRect("Images/background.jpg", 1920, 1920
 	backgroundImage.y = display.contentWidth/2
 
 
-local linkchar = display.newImageRect("Images/linkchar.png", 800, 400)
-	linkchar.x = 500
-	linkchar.y = 500
+local linkchar = display.newImageRect("Images/linkchar.png", 860, 750)
+	linkchar.x = display.contentWidth/2
+	linkchar.y = display.contentHeight/2
 
 
-local shirt = display.newImageRect("Images/shirt.png", 300, 300)
+local shirt = display.newImageRect("Images/shirt.png", 300, 200)
 local shirtWidth = shirt.width
 local shirtHeight = shirt.height
 
 -- variables to keep track of which object I touched first
 local alreadyTouchedshirt = false
 
--- sets x and y for 
-shirt.x = 400
-shirt.y = 700
+-- sets x and y for shirt
+shirt.x = -100
+shirt.y = 800
 
 local function shirtListener(touch)
 
@@ -54,6 +54,47 @@ local function shirtListener(touch)
 
 end
 
--- add the respective listeners to each object
+-- listener for shirt object
 shirt:addEventListener("touch", shirtListener)
 
+
+local pants = display.newImageRect("Images/pants.png", 300, 300)
+local pantsWidth = pants.width
+local pantsHeight = pants.height
+
+-- variables to keep track of which object I touched first
+local alreadyTouchedpants = false
+
+-- sets x and y for pants
+pants.x = 1000
+pants.y = 800
+
+local function pantsListener(touch)
+
+	if (touch.phase == "began") then
+		if (alreadyTouchedshirt == false) then
+			alreadyTouchedpants = true	
+
+		end
+
+	end
+
+	if  ( (touch.phase == "moved") and (alreadyTouchedpants == true) ) then
+		pants.x = touch.x 
+		pants.y = touch.y
+
+	end
+
+	if (touch.phase == "ended") then
+		alreadyTouchedpants = false	
+		alreadyTouchedshirt = false	
+
+	end
+
+end
+
+-- listener for pants object
+pants:addEventListener("touch", pantsListener)
+
+local commandtext = display.newText ("Dress Link up!", display.contentWidth/2, 200, "Images/vinet.ttf", 140)
+	commandtext:setFillColor (1, 0.2, 0)
