@@ -6,6 +6,9 @@
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
+
+local Ting = audio.loadSound("sounds/ting.mp3")
+
 --background image
 local backgroundImage = display.newImageRect("Images/background.jpg", 1920, 1920)
 
@@ -98,3 +101,7 @@ pants:addEventListener("touch", pantsListener)
 
 local commandtext = display.newText ("Dress Link up!", display.contentWidth/2, 200, "Images/vinet.ttf", 140)
 	commandtext:setFillColor (1, 0.2, 0)
+
+local backgroundMusic = audio.loadSound ("Sounds/Party.mp3")
+
+audio.play (backgroundMusic)
